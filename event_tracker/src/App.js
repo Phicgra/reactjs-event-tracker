@@ -36,10 +36,20 @@ function App() {
       day: "14th Dec, 2023",
       reminder: true,
     }])
+
+    const deleteTask =(id) => {
+      // console.log('delete', id );
+      setTasks(tasks.filter((task) => task.id !== id))
+
+    }
+    const toggleReminder = (id) => {
+      // console.log(id)
+      setTasks(tasks.map((task) => task.id === id ? {...task, reminder: !task.reminder} : task))
+    }
   return (
     <div className="container">
       <Header title="reactjs"/>
-      <Tasks tasks={tasks}/>
+      {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder}/> : 'No Task for Today! Enjoy your day Boss.'} 
     </div>
   );
 }
